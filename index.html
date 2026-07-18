@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Walker Watch — Live Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.14.1/mqtt.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <p class="eyebrow">Live monitor · EMQX Cloud</p>
+        <h1>Baby Walker Watch</h1>
+      </div>
+      <div class="conn-status">
+        <span class="dot" id="connDot"></span>
+        <span id="connLabel">Belum tersambung</span>
+      </div>
+    </header>
+
+    <div class="device-tabs" id="deviceTabs"></div>
+
+    <div class="err-msg" id="errMsg"></div>
+    <button id="retryBtn">Coba sambungkan lagi</button>
+
+    <div class="card">
+      <h2 id="deviceTitle">Baby Walker #1</h2>
+      <p class="device-meta">Terakhir update: <span id="lastSeen">belum ada data</span></p>
+      <div class="gauges">
+        <div>
+          <svg id="speedGauge" width="150" height="150" viewBox="0 0 150 150"></svg>
+          <div class="speed-num">
+            <span class="val" id="speedVal">–</span>
+            <div class="unit">cm/detik</div>
+          </div>
+        </div>
+
+        <div class="dist-block">
+          <div class="label-row">
+            <span>Jarak ke depan</span>
+            <span><span class="val" id="distVal">–</span> <span class="unit">cm</span></span>
+          </div>
+          <div class="track">
+            <div class="zone" id="distZone" style="left:0; width:20%;"></div>
+            <div class="fill" id="distFill"></div>
+          </div>
+          <div class="track-caption">
+            <span>0 cm</span>
+            <span>zona rem ≤ 20 cm</span>
+            <span id="distMaxLabel">100 cm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brake-banner" id="brakeBanner" style="margin-bottom:20px;">
+      <span id="brakeText">Rem tidak aktif</span>
+      <span class="tag" id="brakeTag">AMAN</span>
+    </div>
+
+    <div class="card log">
+      <h2>Riwayat Pesan</h2>
+      <table>
+        <thead>
+          <tr><th>Waktu</th><th>Jarak (cm)</th><th>Kecepatan (cm/s)</th><th>Rem</th></tr>
+        </thead>
+        <tbody id="logBody"></tbody>
+      </table>
+      <div class="log-empty" id="logEmpty">Belum ada data masuk.</div>
+    </div>
+  </div>
+
+  <script src="mqtt-config.js"></script>
+  <script src="app.js"></script>

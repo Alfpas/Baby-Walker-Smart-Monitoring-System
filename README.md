@@ -132,6 +132,3 @@ Karena dashboard ini murni file statis, semua koneksi MQTT terjadi langsung dari
 - Kredensial pada `baby_walker_dashboard.html` tertanam langsung di kode (client-side), jadi hanya cocok untuk penggunaan pribadi/link tidak disebar — bukan untuk dashboard publik.
 - Pisahkan izin: user `esp1`/`esp2`/`esp3` cukup diberi izin **publish**, sedangkan user `dashboard-viewer` cukup diberi izin **subscribe**. Jangan pakai satu user yang sama untuk semuanya.
 
-## Lisensi
-
-Belum ditentukan — tambahkan file `LICENSE` sesuai kebutuhan (misal MIT) sebelum publish ke publik.
